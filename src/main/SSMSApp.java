@@ -17,65 +17,75 @@ public class SSMSApp {
             System.out.println("2. View All Students");
             System.out.println("3. Update Student");
             System.out.println("4. Delete Student");
-            System.out.println("5. Exit");
+            System.out.println("5. Search by ID ");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = sc.nextInt();
 
-            switch (choice) {
+            //while(true){
 
-                case 1:
+                switch (choice) {
 
-                    sc.nextLine(); // buffer clear
-                    System.out.print("Enter Student Name: ");
-                    String name = sc.nextLine();
+                    case 1:
 
-                    System.out.print("Enter Student Email: ");
-                    String email = sc.nextLine();
+                        sc.nextLine(); // buffer clear
+                        System.out.print("Enter Student Name: ");
+                        String name = sc.nextLine();
 
-                    System.out.print("Enter Student Course: ");
-                    String course = sc.nextLine();
+                        System.out.print("Enter Student Email: ");
+                        String email = sc.nextLine();
 
-                    Student s = new Student(name, email, course);
-                    dao.addStudent(s);
-                    break;
+                        System.out.print("Enter Student Course: ");
+                        String course = sc.nextLine();
 
-                case 2:
-                    dao.getAllStudents();
-                    break;
+                        Student s = new Student(name, email, course);
+                        dao.addStudent(s);
+                        break;
 
-                case 3:
-                    System.out.print("Enter Student ID to Update: ");
-                    int uid = sc.nextInt();
+                    case 2:
+                        dao.getAllStudents();
+                        break;
 
-                    sc.nextLine();
-                    System.out.print("Enter New Name: ");
-                    String newName = sc.nextLine();
+                    case 3:
+                        System.out.print("Enter Student ID to Update: ");
+                        int uid = sc.nextInt();
 
-                    System.out.print("Enter New Email: ");
-                    String newEmail = sc.nextLine();
+                        sc.nextLine();
+                        System.out.print("Enter New Name: ");
+                        String newName = sc.nextLine();
 
-                    System.out.print("Enter New Course: ");
-                    String newCourse = sc.nextLine();
+                        System.out.print("Enter New Email: ");
+                        String newEmail = sc.nextLine();
 
-                    dao.updateStudent(uid, newName, newEmail, newCourse);
-                    break;
+                        System.out.print("Enter New Course: ");
+                        String newCourse = sc.nextLine();
 
-                case 4:
-                    System.out.print("Enter Student ID to Delete: ");
-                    int did = sc.nextInt();
+                        dao.updateStudent(uid, newName, newEmail, newCourse);
+                        break;
 
-                    dao.deleteStudent(did);
-                    break;
+                    case 4:
+                        System.out.print("Enter Student ID to Delete: ");
+                        int did = sc.nextInt();
 
-                case 5:
-                    System.out.println("Thank you! Application Closed.");
-                    sc.close();
-                    System.exit(0);
+                        dao.deleteStudent(did);
+                        break;
 
-                default:
-                    System.out.println("Invalid Choice! Try Again.");
-            }
+                    case 5:
+                        System.out.println("Enter ID to search");
+                        int sid = sc.nextInt();
+                        dao.getStudentById(sid);
+                        break;
+
+                    case 6:
+                        System.out.println("Thank you! Application Closed.");
+                        sc.close();
+                        System.exit(0);
+
+                    default:
+                        System.out.println("Invalid Choice! Try Again.");
+                }
+            
         }
     }
 }

@@ -111,4 +111,30 @@ public class StudentDAO {
         }
     }
 
+    public void getStudentById(int student_id) {
+        try {
+            Connection conn = DBConnection.getConnection();
+
+            String query = "Select * from students where student_id=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setInt(1, student_id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("\n📍 Student Found");
+                System.out.println("ID     : " + rs.getInt("student_id"));
+                System.out.println("Name   : " + rs.getString("name"));
+                System.out.println("Email  : " + rs.getString("email"));
+                System.out.println("Course : " + rs.getString("course"));
+            } else {
+                System.out.println("⚠ Student not found with ID: " + student_id);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
