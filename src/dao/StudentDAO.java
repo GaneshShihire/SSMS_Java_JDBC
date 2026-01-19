@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Student;
 import util.DBConnection;
 
@@ -135,6 +138,35 @@ public class StudentDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Student> getStudentByCourse(String course){
+
+        List<Student> list = new ArrayList<>();
+
+        try{
+            Connection conn = DBConnection.getConnection();
+
+            PreparedStatement ps = conn.prepareStatement("select * from students where course =?");
+
+            ps.setString(1, course);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                list.add(new Student(
+                    rs.getInt("student_id"),
+                    rs.getString("name"),
+                    rs.getString("email"),
+                    rs.getString("course")
+
+                ));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
 }
