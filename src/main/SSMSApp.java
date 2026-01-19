@@ -2,7 +2,10 @@ package main;
 
 import java.util.List;
 import java.util.Scanner;
+
+import dao.CourseDAO;
 import dao.StudentDAO;
+import model.Course;
 import model.Student;
 
 public class SSMSApp {
@@ -11,6 +14,7 @@ public class SSMSApp {
 
         Scanner sc = new Scanner(System.in);
         StudentDAO dao = new StudentDAO();
+        CourseDAO courseDAO = new CourseDAO();
 
         while (true) {
             System.out.println("\n===== STUDENT MANAGEMENT SYSTEM =====");
@@ -19,8 +23,14 @@ public class SSMSApp {
             System.out.println("3. Update Student");
             System.out.println("4. Delete Student");
             System.out.println("5. Search Student by ID");
+
+            System.out.println("----- COURSE MENU -----");
             System.out.println("6. Search Students by Course");
-            System.out.println("7. Exit");
+            System.out.println("7. Add Course");
+            System.out.println("8. View All Courses");
+            System.out.println("9. Assign Student to Course");
+            // System.out.println("9. View Students by Course");
+            System.out.println("10. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = sc.nextInt();
@@ -104,6 +114,32 @@ public class SSMSApp {
                     break;
 
                 case 7:
+                    sc.nextLine();
+                    System.out.println("Enter Course Name: ");
+                    String courseName = sc.nextLine();
+
+                    System.out.println("Enter Duration: ");
+                    String duration = sc.nextLine();
+
+                    Course crs = new Course(courseName, duration);
+                    courseDAO.addCourse(crs);
+                    break;
+
+                case 8:
+                    courseDAO.getAllCourses();
+                    break;
+
+                case 9:
+                    System.out.println("Enter Student ID: ");
+                    int sID = sc.nextInt();
+
+                    System.out.println("Enter Course ID: ");
+                    int cID = sc.nextInt();
+
+                    courseDAO.assignStudentToCourse(sID, cID);
+                    break;
+
+                case 10:
                     System.out.println("Thank you! Application Closed.");
                     sc.close();
                     System.exit(0);
