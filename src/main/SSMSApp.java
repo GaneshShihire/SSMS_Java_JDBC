@@ -136,6 +136,22 @@ public class SSMSApp {
                     System.out.println("Enter Course ID: ");
                     int cID = sc.nextInt();
 
+                    if (!dao.isStudentExists(sID)) {
+                        System.out.println("Student does not exist");
+                        break;
+                    }
+
+                    if (!courseDAO.isCourseExists(cID)) {
+                        System.out.println("Course does not exist");
+                        break;
+                    }
+
+                    if (courseDAO.isAlreadyAssigned(sID, cID)) {
+                        System.out.println("Student is already assigned to this course");
+                        break;
+                    }
+
+
                     courseDAO.assignStudentToCourse(sID, cID);
                     break;
 

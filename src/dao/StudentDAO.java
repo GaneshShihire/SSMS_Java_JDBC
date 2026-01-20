@@ -12,6 +12,22 @@ import util.DBConnection;
 
 public class StudentDAO {
 
+    public boolean isStudentExists(int studentId){
+        String sql = "Select * from students where student_id =?";
+        try(Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql)){
+
+                ps.setInt(1, studentId);
+
+                ResultSet rs = ps.executeQuery();
+
+                return rs.next();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+            return false;
+    }
+
     public boolean addStudent(Student student) {
         boolean isInserted = false;
 

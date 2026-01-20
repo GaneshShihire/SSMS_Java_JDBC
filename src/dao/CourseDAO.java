@@ -5,6 +5,44 @@ import model.Course;
 import util.DBConnection;
 
 public class CourseDAO {
+
+    public boolean isCourseExists(int courseId) {
+
+        String sql = "SELECT course_id FROM courses WHERE course_id=?";
+
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, courseId);
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isAlreadyAssigned(int studentId, int courseId) {
+
+        String sql = "SELECT * FROM student_course WHERE student_id=? AND course_id=?";
+
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, studentId);
+            ps.setInt(2, courseId);
+
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     // Add course
 
     public void addCourse(Course course) {
