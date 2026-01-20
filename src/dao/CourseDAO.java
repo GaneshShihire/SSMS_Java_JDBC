@@ -75,7 +75,7 @@ public class CourseDAO {
 
     public void viewStudentsPerCourse(int courseId) {
         String sql = """
-                select s.student_id, s.name. s.email
+                select s.student_id, s.name, s.email
                 from students s
                 join student_course sc
                 on s.student_id = sc.student_id
