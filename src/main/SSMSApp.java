@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import dao.CourseDAO;
 import dao.StudentDAO;
+import dao.AdminDAO;
 import model.Course;
 import model.Student;
 
@@ -15,6 +16,36 @@ public class SSMSApp {
         Scanner sc = new Scanner(System.in);
         StudentDAO dao = new StudentDAO();
         CourseDAO courseDAO = new CourseDAO();
+        AdminDAO adminDAO = new AdminDAO();
+
+        int attempts = 0;
+        boolean logedIn = false;
+
+        while (attempts < 3) {
+
+            System.out.println("===== ADMIN LOGIN =====");
+
+            System.out.print("Enter Username: ");
+            String username = sc.nextLine();
+
+            System.out.print("Enter Password: ");
+            String password = sc.nextLine();
+
+            if (adminDAO.login(username, password)) {
+                logedIn = true;
+                System.out.println("Login Successfully");
+                break;
+
+            } else {
+                attempts++;
+                System.out.println("Invalid Credential , Attempts Left : " + (3 - attempts));
+            }
+        }
+
+        if (!logedIn) {
+            System.out.println("Too many attempts, Try after some time");
+            return;
+        }
 
         while (true) {
             System.out.println("\n===== STUDENT MANAGEMENT SYSTEM =====");
@@ -150,7 +181,6 @@ public class SSMSApp {
                         System.out.println("Student is already assigned to this course");
                         break;
                     }
-
 
                     courseDAO.assignStudentToCourse(sID, cID);
                     break;
