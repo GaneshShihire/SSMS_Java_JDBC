@@ -5,26 +5,26 @@ public class Course {
     private String courseName;
     private String duration;
 
-    public Course(String courseName, String duration){
+    public Course(String courseName, String duration) {
         this.courseName = courseName;
         this.duration = duration;
     }
 
-    public Course(int courseId, String courseName, String duration){
+    public Course(int courseId, String courseName, String duration) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.duration = duration;
     }
 
-    public int getCourseId(){
+    public int getCourseId() {
         return courseId;
     }
 
-    public String getCourseName(){
+    public String getCourseName() {
         return courseName;
     }
 
-    public String getDuration(){
+    public String getDuration() {
         return duration;
     }
 }

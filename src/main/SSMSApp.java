@@ -19,7 +19,7 @@ public class SSMSApp {
         AdminDAO adminDAO = new AdminDAO();
 
         int attempts = 0;
-        boolean logedIn = false;
+        boolean loggedIn = false;
 
         while (attempts < 3) {
 
@@ -32,8 +32,8 @@ public class SSMSApp {
             String password = sc.nextLine();
 
             if (adminDAO.login(username, password)) {
-                logedIn = true;
-                System.out.println("Login Successfully");
+                loggedIn = true;
+                System.out.println("Login Successful");
                 break;
 
             } else {
@@ -42,31 +42,15 @@ public class SSMSApp {
             }
         }
 
-        if (!logedIn) {
+        if (!loggedIn) {
             System.out.println("Too many attempts, Try after some time");
             return;
         }
 
         while (true) {
-            System.out.println("\n===== STUDENT MANAGEMENT SYSTEM =====");
-            System.out.println("1. Add Student");
-            System.out.println("2. View All Students");
-            System.out.println("3. Update Student");
-            System.out.println("4. Delete Student");
-            System.out.println("5. Search Student by ID");
 
-            System.out.println("----- COURSE MENU -----");
-            System.out.println("6. Search Students by Course");
-            System.out.println("7. Add Course");
-            System.out.println("8. View All Courses");
-            System.out.println("9. Assign Student to Course");
-            // System.out.println("9. View Students by Course");
-            System.out.println("10. Exit");
-            System.out.print("Enter your choice: ");
-
+            printMenu();
             int choice = sc.nextInt();
-
-            // while(true){
 
             switch (choice) {
 
@@ -196,4 +180,23 @@ public class SSMSApp {
 
         }
     }
+
+    private static void printMenu() {
+        System.out.println("\n===== STUDENT MANAGEMENT SYSTEM =====");
+        System.out.println("1. Add Student");
+        System.out.println("2. View All Students");
+        System.out.println("3. Update Student");
+        System.out.println("4. Delete Student");
+        System.out.println("5. Search Student by ID");
+
+        System.out.println("----- COURSE MENU -----");
+        System.out.println("6. Search Students by Course");
+        System.out.println("7. Add Course");
+        System.out.println("8. View All Courses");
+        System.out.println("9. Assign Student to Course");
+        // System.out.println("9. View Students by Course");
+        System.out.println("10. Exit");
+        System.out.print("Enter your choice: ");
+    }
+
 }
